@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday 🎂</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      margin-top: 40px;
+      text-shadow: 0 0 15px #ff6fa5, 0 0 25px #ff4081;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin: 20px auto;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff6fa5, 0 0 20px #ff4081; }
+      to { text-shadow: 0 0 20px #ff6fa5, 0 0 40px #ff4081; }
+    }
+
+    .ask-name {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      transition: all 0.8s ease-in-out;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      margin: 10px;
+    }
+    
+    input:focus {
+      box-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #fff;
+      color: #ff4d6d;
+      font-size: 1rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff4d6d;
+      color: #fff;
+    }
+
+    /* Transition states */
+    .fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #message {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease-in-out;
+    }
+    #message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Birthday Cake */
+    .cake-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .cake {
+      width: 120px;
+      height: 120px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease-in-out;
+      font-size: 80px;
+      line-height: 120px;
+      background: linear-gradient(45deg, #ff6b9d, #ffa5c7);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: inline-block;
+    }
+    .cake.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Candles animation */
+    .candles {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+    }
+
+    .candle {
+      width: 10px;
+      height: 30px;
+      background: #ffcc00;
+      border-radius: 5px;
+      position: relative;
+    }
+    .candle::before {
+      content: '';
+      width: 8px;
+      height: 10px;
+      background: orange;
+      position: absolute;
+      top: -10px;
+      left: 1px;
+      border-radius: 50%;
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #ff4d6d;
+      transform: rotate(45deg);
+      animation: floatUp 6s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #ff4d6d;
+      border-radius: 50%;
+    }
+    .heart::before { top: -9px; left: 0; }
+    .heart::after { left: -9px; top: 0; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      background: red;
+      animation: confetti-fall 3s linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Audio context for generated music -->
+  <div id="audio-context" style="display: none;"></div>
+
+  <h1>🎉 Happy Birthday, Beautiful 🎉</h1>
+  <p>Today is your special day, and I wanted to make it a little more magical ✨</p>
+
+  <!-- Ask her for the cute name -->
+  <div class="ask-name" id="askSection">
+    <p>Before we continue… tell me 💕</p>
+    <p><strong>What sweet name would you like me to call you?</strong></p>
+    <input type="text" id="nickname" placeholder="e.g. Angel, Cutie, Babe 💖">
+    <button onclick="saveName()">Submit</button>
+  </div>
+
+  <!-- This message shows AFTER she gives a name -->
+  <div id="message">
+    <p>Okay… from now on, I'll call you <span id="displayName"></span> 💕</p>
+    <p>
+      <span id="displayName2"></span>, I wish you endless happiness, sweet moments, and all the smiles in the world today 💫<br>
+      You deserve the most beautiful birthday ever! 🎂✨
+    </p>
+
+    <!-- Birthday Cake with Candles -->
+    <div class="cake-container">
+      <div class="candles" id="candles">
+        <div class="candle"></div>
+        <div class="candle"></div>
+        <div class="candle"></div>
+      </div>
+      <!-- Using emoji cake instead of external image -->
+      <div class="cake" id="cakeImage">🎂</div>
+    </div>
+
+    <!-- Blow Candles Button -->
+    <br>
+    <button id="blowBtn" class="hidden" onclick="blowCandles()">🎈 Blow the Candles 🎈</button>
+  </div>
+
+  <script>
+    let musicPlaying = false;
+    let audioContext = null;
+    let musicInterval = null;
+
+    function initAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioContext;
+    }
+
+    function playNote(frequency, duration = 0.3, volume = 0.1) {
+      const ctx = initAudioContext();
+      if (ctx.state === 'suspended') {
+        ctx.resume().then(() => {
+          console.log('AudioContext resumed');
+        }).catch(err => {
+          console.error('Failed to resume AudioContext:', err);
+        });
+      }
+
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
+      oscillator.type = 'sine';
+
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+
+      oscillator.start(ctx.currentTime);
+      oscillator.stop(ctx.currentTime + duration);
+    }
+
+    function playHappyBirthdayMelody() {
+      console.log('Scheduling Happy Birthday melody'); // Debug log
+      // Full Happy Birthday melody (all four phrases), 20% faster
+      const melody = [
+        // Phrase 1: "Happy birthday to you"
+        { note: 261.63, duration: 0.32 }, // C4 (was 0.4)
+        { note: 261.63, duration: 0.32 }, // C4
+        { note: 293.66, duration: 0.64 }, // D4 (was 0.8)
+        { note: 261.63, duration: 0.64 }, // C4
+        { note: 349.23, duration: 0.64 }, // F4
+        { note: 329.63, duration: 0.96 }, // E4 (was 1.2)
+        // Phrase 2: "Happy birthday to you"
+        { note: 261.63, duration: 0.32 }, // C4
+        { note: 261.63, duration: 0.32 }, // C4
+        { note: 293.66, duration: 0.64 }, // D4
+        { note: 261.63, duration: 0.64 }, // C4
+        { note: 392.00, duration: 0.64 }, // G4
+        { note: 349.23, duration: 0.96 }, // F4
+        // Phrase 3: "Happy birthday dear friend"
+        { note: 261.63, duration: 0.32 }, // C4
+        { note: 261.63, duration: 0.32 }, // C4
+        { note: 523.25, duration: 0.64 }, // C5
+        { note: 440.00, duration: 0.64 }, // A4
+        { note: 349.23, duration: 0.64 }, // F4
+        { note: 329.63, duration: 0.64 }, // E4
+        { note: 293.66, duration: 0.64 }, // D4
+        // Phrase 4: "Happy birthday to you"
+        { note: 466.16, duration: 0.32 }, // A#4
+        { note: 466.16, duration: 0.32 }, // A#4
+        { note: 440.00, duration: 0.64 }, // A4
+        { note: 349.23, duration: 0.64 }, // F4
+        { note: 392.00, duration: 0.64 }, // G4
+        { note: 349.23, duration: 0.96 }, // F4
+      ];
+
+      let currentTime = 0;
+      melody.forEach(({ note, duration }) => {
+        setTimeout(() => {
+          if (musicPlaying) {
+            playNote(note, duration, 0.15);
+          }
+        }, currentTime * 1000);
+        currentTime += duration;
+      });
+
+      // Loop the melody
+      if (musicPlaying) {
+        musicInterval = setTimeout(() => {
+          if (musicPlaying) {
+            playHappyBirthdayMelody();
+          }
+        }, (currentTime + 0.8) * 1000); // Reduced pause to 0.8s
+      }
+    }
+
+    function startBackgroundMusic() {
+      if (!musicPlaying) {
+        musicPlaying = true;
+        const ctx = initAudioContext();
+        if (ctx.state === 'suspended') {
+          ctx.resume().then(() => {
+            console.log('AudioContext resumed for background music');
+            playHappyBirthdayMelody();
+          }).catch(err => {
+            console.error('Failed to resume AudioContext:', err);
+          });
+        } else {
+          playHappyBirthdayMelody();
+        }
+      }
+    }
+
+    function stopBackgroundMusic() {
+      musicPlaying = false;
+      if (musicInterval) {
+        clearTimeout(musicInterval);
+        musicInterval = null;
+      }
+    }
+
+    function saveName() {
+      const name = document.getElementById('nickname').value.trim();
+      if (name === "") {
+        alert("Please enter a cute name 😊");
+        return;
+      }
+
+      // Set the chosen name
+      document.getElementById('displayName').innerText = name;
+      document.getElementById('displayName2').innerText = name;
+
+      // Fade out the ask section
+      const askSection = document.getElementById('askSection');
+      askSection.classList.add('fade-out');
+
+      // After fade-out, show the message & cake
+      setTimeout(() => {
+        askSection.classList.add('hidden');
+        const message = document.getElementById('message');
+        message.classList.add('show');
+
+        // Show cake with animation
+        setTimeout(() => {
+          document.getElementById('cakeImage').classList.add('show');
+          document.getElementById('blowBtn').classList.remove('hidden');
+        }, 500);
+
+        // Start background music after name submission
+        startBackgroundMusic();
+      }, 800);
+    }
+
+    // Blow candles: remove candle flames & show confetti
+    function blowCandles() {
+      document.getElementById('candles').style.display = 'none';
+      launchConfetti();
+      document.getElementById('blowBtn').innerText = "🎉 Yay! 🎉";
+      document.getElementById('blowBtn').disabled = true;
+    }
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 300);
+
+    // Confetti effect
+    function launchConfetti() {
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        const colors = ['#ff4d6d', '#ffcc00', '#00c4ff', '#8aff80', '#ff80ff'];
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    }
+
+    // Start music on first user interaction
+    function handleUserInteraction() {
+      startBackgroundMusic();
+      // Remove event listeners after first interaction to prevent multiple triggers
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+      document.removeEventListener('touchstart', handleUserInteraction);
+    }
+
+    document.addEventListener('click', handleUserInteraction);
+    document.addEventListener('keydown', handleUserInteraction);
+    document.addEventListener('touchstart', handleUserInteraction);
+  </script>
+</body>
+</html>
