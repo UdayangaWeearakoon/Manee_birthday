@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Happy Birthday 🎂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
@@ -22,11 +23,11 @@
       font-family: 'Inter', sans-serif;
       color: #fff;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
+      padding: 20px;
     }
 
-    /* Animated background particles */
     .bg-particles {
       position: fixed;
       top: 0;
@@ -47,62 +48,42 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%, 90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Glass morphism container */
     .glass-container {
       position: relative;
       z-index: 2;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(20px);
-      border-radius: 30px;
+      border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 40px;
-      margin: 20px auto;
-      max-width: 600px;
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       animation: slideInUp 1s ease-out;
     }
 
     @keyframes slideInUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     h1 {
       font-family: 'Dancing Script', cursive;
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       background: linear-gradient(45deg, #ff6b9d, #ffd93d, #6bcf7f, #4d9de0);
       background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: gradientShift 3s ease-in-out infinite;
-      text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+      text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
     }
 
     @keyframes gradientShift {
@@ -111,421 +92,155 @@
     }
 
     p {
-      font-size: 1.2rem;
-      margin: 15px auto;
-      max-width: 500px;
-      line-height: 1.7;
+      font-size: 1rem;
+      margin: 12px auto;
+      max-width: 450px;
+      line-height: 1.6;
       font-weight: 300;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .subtitle {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 400;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       opacity: 0.9;
     }
 
-    /* Input section styling */
     .ask-name {
-      margin-top: 30px;
-      font-size: 1.1rem;
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 25px;
+      font-size: 1rem;
     }
 
     .input-group {
-      margin: 25px 0;
-      position: relative;
+      margin: 20px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
 
     input {
-      width: 280px;
-      padding: 15px 20px;
-      border-radius: 25px;
+      width: 80%;
+      max-width: 250px;
+      padding: 12px 15px;
+      border-radius: 20px;
       border: 2px solid rgba(255, 255, 255, 0.3);
-      outline: none;
-      font-size: 1.1rem;
       background: rgba(255, 255, 255, 0.1);
-      color: white;
+      outline: none;
+      font-size: 1rem;
+      color: #fff;
       text-align: center;
-      transition: all 0.3s ease;
       backdrop-filter: blur(10px);
     }
-    
-    input::placeholder {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
+    input::placeholder { color: rgba(255, 255, 255, 0.7); }
     input:focus {
       border-color: #ff6b9d;
-      box-shadow: 
-        0 0 20px rgba(255, 107, 157, 0.4),
-        0 0 40px rgba(255, 107, 157, 0.2);
-      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 107, 157, 0.4);
+      transform: scale(1.03);
     }
 
     .submit-btn {
-      padding: 15px 35px;
+      padding: 12px 25px;
       background: linear-gradient(45deg, #ff6b9d, #ff4d6d);
       color: white;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 500;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
-      margin-left: 15px;
-      position: relative;
-      overflow: hidden;
+      transition: 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
     }
+    .submit-btn:hover { transform: translateY(-3px); }
 
-    .submit-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.5s;
-    }
+    .fade-out { opacity: 0; transform: translateY(-20px) scale(0.95); pointer-events: none; }
+    .hidden { display: none; }
 
-    .submit-btn:hover::before {
-      left: 100%;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(255, 77, 109, 0.6);
-    }
-
-    .submit-btn:active {
-      transform: translateY(-1px);
-    }
-
-    /* Transition states */
-    .fade-out {
-      opacity: 0;
-      transform: translateY(-30px) scale(0.9);
-      pointer-events: none;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    #message {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    #message.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    #message { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+    #message.show { opacity: 1; transform: translateY(0); }
 
     .name-highlight {
       background: linear-gradient(45deg, #ff6b9d, #ffd93d);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
       font-weight: 600;
-      font-size: 1.3em;
+      font-size: 1.2em;
     }
 
-    /* Enhanced Birthday Cake */
+    /* Cake scaling */
     .cake-container {
-      position: relative;
-      display: inline-block;
-      margin: 30px 0;
-      perspective: 1000px;
+      margin: 20px 0;
     }
-
     .cake {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
+      font-size: 80px;
       opacity: 0;
-      transform: scale(0.5) rotateY(20deg);
-      transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      font-size: 100px;
-      line-height: 150px;
-      background: 
-        radial-gradient(circle at 30% 30%, #ffb347, #ff8c42),
-        linear-gradient(45deg, #ff6b9d, #ffa5c7);
-      border-radius: 25px;
-      box-shadow: 
-        0 20px 60px rgba(0,0,0,0.4),
-        0 0 30px rgba(255, 107, 157, 0.3);
+      transition: all 1s ease;
       display: inline-block;
-      position: relative;
-      cursor: pointer;
+      line-height: 120px;
+      background: linear-gradient(45deg, #ff6b9d, #ffa5c7);
+      border-radius: 20px;
     }
-
-    .cake::before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      background: linear-gradient(45deg, #ff6b9d, #ffd93d, #6bcf7f, #4d9de0);
-      border-radius: 30px;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .cake:hover::before {
-      opacity: 0.7;
-    }
-
-    .cake.show {
-      opacity: 1;
-      transform: scale(1) rotateY(0deg);
-    }
-
-    .cake:hover {
-      transform: scale(1.1) rotateY(5deg);
-    }
-
-    /* Enhanced Candles */
+    .cake.show { opacity: 1; transform: scale(1); }
     .candles {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 20px;
-    }
-
-    .candle {
-      width: 12px;
-      height: 35px;
-      background: linear-gradient(to bottom, #ffd93d, #ffb347);
-      border-radius: 6px;
       position: relative;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      top: -30px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
     }
-    
-    .candle::before {
-      content: '';
-      width: 10px;
-      height: 12px;
-      background: radial-gradient(circle, #ff6b42, #ff4d29);
-      position: absolute;
-      top: -12px;
-      left: 1px;
-      border-radius: 50%;
-      animation: flicker 0.5s infinite alternate;
-      box-shadow: 0 0 15px #ff6b42;
-    }
+    .candle { width: 8px; height: 25px; background: #ffd93d; border-radius: 4px; }
 
-    @keyframes flicker {
-      from { 
-        transform: scale(1) translateY(0px); 
-        opacity: 1; 
-        box-shadow: 0 0 15px #ff6b42;
-      }
-      to { 
-        transform: scale(1.2) translateY(-2px); 
-        opacity: 0.8; 
-        box-shadow: 0 0 25px #ff6b42;
-      }
-    }
-
-    /* Enhanced blow button */
     .blow-btn {
-      padding: 18px 40px;
+      padding: 14px 30px;
       background: linear-gradient(45deg, #6bcf7f, #4d9de0);
       color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1rem;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 
-        0 10px 30px rgba(75, 157, 224, 0.4),
-        0 0 20px rgba(107, 207, 127, 0.3);
-      margin-top: 25px;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s;
+      margin-top: 15px;
     }
+    .blow-btn.hidden { display: none; }
 
-    .blow-btn::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .blow-btn:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-
-    .blow-btn:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 
-        0 15px 40px rgba(75, 157, 224, 0.6),
-        0 0 30px rgba(107, 207, 127, 0.5);
-    }
-
-    .blow-btn:disabled {
-      background: linear-gradient(45deg, #ff6b9d, #ffd93d);
-      transform: none;
-      cursor: default;
-      animation: celebration 0.6s ease-in-out;
-    }
-
-    @keyframes celebration {
-      0%, 100% { transform: scale(1); }
-      25% { transform: scale(1.1) rotate(-5deg); }
-      75% { transform: scale(1.1) rotate(5deg); }
-    }
-
-    /* Enhanced Floating Hearts */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(45deg, #ff6b9d, #ff4d6d);
-      transform: rotate(45deg);
-      animation: floatUp 8s linear infinite;
-      filter: drop-shadow(0 0 6px rgba(255, 107, 157, 0.6));
-    }
-    .heart::before, .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(45deg, #ff6b9d, #ff4d6d);
-      border-radius: 50%;
-    }
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: -10px; top: 0; }
-
-    @keyframes floatUp {
-      0% { 
-        transform: translateY(0) rotate(45deg) scale(0); 
-        opacity: 0; 
-      }
-      10% { 
-        opacity: 1; 
-        transform: translateY(-10vh) rotate(45deg) scale(1); 
-      }
-      90% { 
-        opacity: 1; 
-        transform: translateY(-90vh) rotate(45deg) scale(1); 
-      }
-      100% { 
-        transform: translateY(-100vh) rotate(45deg) scale(0); 
-        opacity: 0; 
-      }
-    }
-
-    /* Enhanced Confetti */
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      animation: confetti-fall 4s linear forwards;
-      opacity: 0.9;
-    }
-
-    .confetti.square { border-radius: 2px; }
-    .confetti.circle { border-radius: 50%; }
-    .confetti.triangle {
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-bottom: 10px solid;
-    }
-
-    @keyframes confetti-fall {
-      0% { 
-        transform: translateY(-10vh) rotate(0deg) scale(1); 
-        opacity: 1; 
-      }
-      100% { 
-        transform: translateY(110vh) rotate(720deg) scale(0.5); 
-        opacity: 0; 
-      }
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .glass-container {
-        margin: 10px;
-        padding: 30px 20px;
-      }
-      
-      h1 {
-        font-size: 3rem;
-      }
-      
-      input {
-        width: 100%;
-        max-width: 250px;
-      }
-      
-      .submit-btn {
-        margin-left: 0;
-        margin-top: 15px;
-      }
-    }
-
-    /* Success message styling */
-    .success-message {
-      background: linear-gradient(45deg, rgba(107, 207, 127, 0.2), rgba(75, 157, 224, 0.2));
-      border: 1px solid rgba(107, 207, 127, 0.3);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 20px 0;
-      backdrop-filter: blur(10px);
+    /* Mobile Adjustments */
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .glass-container { padding: 20px; }
+      h1 { font-size: 2.4rem; }
+      .subtitle { font-size: 1rem; }
+      p { font-size: 0.95rem; }
+      .cake { width: 90px; height: 90px; font-size: 60px; }
+      .candles { top: -20px; gap: 8px; }
+      .blow-btn { width: 90%; }
+      input, .submit-btn { width: 90%; max-width: none; }
     }
   </style>
 </head>
 <body>
-  <!-- Background particles -->
   <div class="bg-particles" id="particles"></div>
-
-  <!-- Audio context for generated music -->
-  <div id="audio-context" style="display: none;"></div>
 
   <div class="glass-container">
     <h1>🎉 Happy Birthday, Beautiful 🎉</h1>
-    <p class="subtitle">Today is your special day, and I wanted to make it absolutely magical ✨</p>
+    <p class="subtitle">Your special day deserves magic ✨</p>
 
-    <!-- Ask her for the cute name -->
     <div class="ask-name" id="askSection">
-      <p>Before we continue… tell me 💕</p>
-      <p><strong>What sweet name would you like me to call you?</strong></p>
+      <p>What sweet name should I call you? 💕</p>
       <div class="input-group">
-        <input type="text" id="nickname" placeholder="e.g. Angel, Cutie, Princess 💖">
+        <input type="text" id="nickname" placeholder="e.g. Angel, Cutie 💖">
         <button class="submit-btn" onclick="saveName()">✨ Submit</button>
       </div>
     </div>
 
-    <!-- This message shows AFTER she gives a name -->
     <div id="message">
-      <div class="success-message">
-        <p>Perfect! From now on, I'll call you <span class="name-highlight" id="displayName"></span> 💕</p>
-      </div>
+      <p>Perfect! From now on, I’ll call you <span class="name-highlight" id="displayName"></span> 💕</p>
       <p>
         <span class="name-highlight" id="displayName2"></span>, I wish you endless happiness, sweet moments, and all the smiles in the world today 💫<br>
         You deserve it 🎂✨ <br> I love you ❤️
       </p>
-
-      <!-- Birthday Cake with Candles -->
       <div class="cake-container">
         <div class="candles" id="candles">
           <div class="candle"></div>
@@ -534,21 +249,14 @@
         </div>
         <div class="cake" id="cakeImage">🎂</div>
       </div>
-
-      <!-- Blow Candles Button -->
       <button id="blowBtn" class="blow-btn hidden" onclick="blowCandles()">🎈 Blow the Candles 🎈</button>
     </div>
   </div>
 
   <script>
-    let musicPlaying = false;
-    let audioContext = null;
-    let musicInterval = null;
-
-    // Create background particles
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 40; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         particle.style.left = Math.random() * 100 + '%';
@@ -558,205 +266,36 @@
       }
     }
 
-    function initAudioContext() {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      return audioContext;
-    }
-
-    function playNote(frequency, duration = 0.3, volume = 0.1) {
-      const ctx = initAudioContext();
-      if (ctx.state === 'suspended') {
-        ctx.resume().then(() => {
-          console.log('AudioContext resumed');
-        }).catch(err => {
-          console.error('Failed to resume AudioContext:', err);
-        });
-      }
-
-      const oscillator = ctx.createOscillator();
-      const gainNode = ctx.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(ctx.destination);
-
-      oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
-      oscillator.type = 'sine';
-
-      gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.01);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
-
-      oscillator.start(ctx.currentTime);
-      oscillator.stop(ctx.currentTime + duration);
-    }
-
-    function playHappyBirthdayMelody() {
-      const melody = [
-        // Enhanced Happy Birthday melody with harmonics
-        { note: 261.63, duration: 0.32 }, // C4
-        { note: 261.63, duration: 0.32 }, // C4
-        { note: 293.66, duration: 0.64 }, // D4
-        { note: 261.63, duration: 0.64 }, // C4
-        { note: 349.23, duration: 0.64 }, // F4
-        { note: 329.63, duration: 0.96 }, // E4
-        { note: 261.63, duration: 0.32 }, // C4
-        { note: 261.63, duration: 0.32 }, // C4
-        { note: 293.66, duration: 0.64 }, // D4
-        { note: 261.63, duration: 0.64 }, // C4
-        { note: 392.00, duration: 0.64 }, // G4
-        { note: 349.23, duration: 0.96 }, // F4
-        { note: 261.63, duration: 0.32 }, // C4
-        { note: 261.63, duration: 0.32 }, // C4
-        { note: 523.25, duration: 0.64 }, // C5
-        { note: 440.00, duration: 0.64 }, // A4
-        { note: 349.23, duration: 0.64 }, // F4
-        { note: 329.63, duration: 0.64 }, // E4
-        { note: 293.66, duration: 0.64 }, // D4
-        { note: 466.16, duration: 0.32 }, // A#4
-        { note: 466.16, duration: 0.32 }, // A#4
-        { note: 440.00, duration: 0.64 }, // A4
-        { note: 349.23, duration: 0.64 }, // F4
-        { note: 392.00, duration: 0.64 }, // G4
-        { note: 349.23, duration: 0.96 }, // F4
-      ];
-
-      let currentTime = 0;
-      melody.forEach(({ note, duration }) => {
-        setTimeout(() => {
-          if (musicPlaying) {
-            playNote(note, duration, 0.15);
-          }
-        }, currentTime * 1000);
-        currentTime += duration;
-      });
-
-      if (musicPlaying) {
-        musicInterval = setTimeout(() => {
-          if (musicPlaying) {
-            playHappyBirthdayMelody();
-          }
-        }, (currentTime + 1) * 1000);
-      }
-    }
-
-    function startBackgroundMusic() {
-      if (!musicPlaying) {
-        musicPlaying = true;
-        const ctx = initAudioContext();
-        if (ctx.state === 'suspended') {
-          ctx.resume().then(() => {
-            playHappyBirthdayMelody();
-          }).catch(err => {
-            console.error('Failed to resume AudioContext:', err);
-          });
-        } else {
-          playHappyBirthdayMelody();
-        }
-      }
-    }
-
-    function stopBackgroundMusic() {
-      musicPlaying = false;
-      if (musicInterval) {
-        clearTimeout(musicInterval);
-        musicInterval = null;
-      }
-    }
-
     function saveName() {
       const name = document.getElementById('nickname').value.trim();
-      if (name === "") {
-        alert("Please enter a sweet name 😊");
-        return;
-      }
+      if (!name) { alert("Please enter a sweet name 😊"); return; }
 
       document.getElementById('displayName').innerText = name;
       document.getElementById('displayName2').innerText = name;
 
       const askSection = document.getElementById('askSection');
       askSection.classList.add('fade-out');
-
       setTimeout(() => {
         askSection.classList.add('hidden');
         const message = document.getElementById('message');
         message.classList.add('show');
-
         setTimeout(() => {
           document.getElementById('cakeImage').classList.add('show');
           document.getElementById('blowBtn').classList.remove('hidden');
-        }, 800);
-
-        startBackgroundMusic();
-      }, 800);
+        }, 700);
+      }, 600);
     }
 
     function blowCandles() {
       document.getElementById('candles').style.display = 'none';
-      launchConfetti();
-      const btn = document.getElementById('blowBtn');
-      btn.innerText = "🎉 Happy Birthday! 🎉";
-      btn.disabled = true;
+      document.getElementById('blowBtn').innerText = "🎉 Happy Birthday! 🎉";
+      document.getElementById('blowBtn').disabled = true;
     }
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.animationDuration = (Math.random() * 2 + 6) + 's';
-      heart.style.animationDelay = Math.random() * 2 + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
-    }
-
-    function launchConfetti() {
-      const shapes = ['square', 'circle', 'triangle'];
-      const colors = ['#ff6b9d', '#ffd93d', '#6bcf7f', '#4d9de0', '#ff4d6d', '#9b59b6'];
-      
-      for (let i = 0; i < 80; i++) {
-        const confetti = document.createElement('div');
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
-        confetti.classList.add('confetti', shape);
-        confetti.style.left = Math.random() * window.innerWidth + 'px';
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        
-        if (shape === 'triangle') {
-          confetti.style.borderBottomColor = color;
-        } else {
-          confetti.style.background = color;
-        }
-        
-        confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 4500);
-      }
-    }
-
-    function handleUserInteraction() {
-      startBackgroundMusic();
-      document.removeEventListener('click', handleUserInteraction);
-      document.removeEventListener('keydown', handleUserInteraction);
-      document.removeEventListener('touchstart', handleUserInteraction);
-    }
-
-    // Initialize everything
-    document.addEventListener('DOMContentLoaded', () => {
-      createParticles();
-      setInterval(createHeart, 800);
+    document.addEventListener('DOMContentLoaded', createParticles);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !document.getElementById('askSection').classList.contains('hidden')) saveName();
     });
-
-    // Handle enter key in input
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !document.getElementById('askSection').classList.contains('hidden')) {
-        saveName();
-      }
-    });
-
-    document.addEventListener('click', handleUserInteraction);
-    document.addEventListener('keydown', handleUserInteraction);
-    document.addEventListener('touchstart', handleUserInteraction);
   </script>
 </body>
 </html>
